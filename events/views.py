@@ -38,3 +38,16 @@ def show_venue(request, venue_id):
     venue = Venue.objects.get(id=venue_id)
     return render(request, 'events/show_venue.html', 
                   {'venue': venue})
+
+def search_venue(request):
+    if request.method == 'POST':
+        searched = request.POST.get('searched')
+        if searched:
+            venues = Venue.objects.filter(name__icontains=searched)
+        else:
+            venues = Venue.objects.none()  # Retorna uma QuerySet vazia
+        return render(request, 'events/search_venues.html', 
+                      {'searched': searched,
+                       'venues': venues})
+    else:
+        return render(request, 'events/show_venue.html', {})
