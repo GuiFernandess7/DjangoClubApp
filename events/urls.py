@@ -8,4 +8,5 @@ urlpatterns = [
     path('add_venue', add_venue, name='add-venue'),
     path('venues', list_venues, name="list-venues"),
     path('show_venue/<venue_id>', show_venue, name="show-venue"),
+    path('search_venues', search_venue, name="search-venues"),
 ]
