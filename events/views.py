@@ -2,6 +2,25 @@ from django.shortcuts import render, redirect
 from .models import *
 from .forms import VenueForm, EventForm
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
+
+# Generate text file venue list
+def venue_text(request):
+    response = HttpResponse(content_type='text/plain')
+    response['Content-Disposition'] = "attachment; filename=venues.txt"
+    venues = Venue.objects.all()
+    
+    lines = []
+    for venue in venues:
+        lines.append(f"""{venue.name}\n
+        {venue.address}\n
+        {venue.zip_code}\n
+        {venue.phone}\n
+        {venue.web}\n
+        {venue.email_address}\n\n""")
+        
+    response.writelines(lines)
+    return response
 
 def home(request):
     return render(request, 'events/home.html', {})
