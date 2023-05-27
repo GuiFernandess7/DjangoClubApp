@@ -30,6 +30,8 @@
                     <div class="card-footer text-body-secondary">
                         <a href="{% url 'update-event' event.id %}" 
                         class="btn btn-warning">Update Event</a>
+                        <a href="{% url 'delete-event' event.id %}" 
+                        class="btn btn-danger">Delete Event</a>
                     </div>
                 </div>
             {% endfor %}
