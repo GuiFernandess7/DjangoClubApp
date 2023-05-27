@@ -7,7 +7,7 @@ def home(request):
     return render(request, 'events/home.html', {})
 
 def all_events(request):
-    events = Event.objects.all()
+    events = Event.objects.all().order_by('name')
     return render(request, 'events/event_list.html', 
                   {"event_list": events})
 
@@ -87,7 +87,7 @@ def update_event(request, event_id):
     form = EventForm(request.POST or None, instance=event)
     if form.is_valid():
         form.save()
-        return redirect('list-events')
+        return redirect('event-list')
     
     return render(request, 'events/update_event.html', 
                   {'event': event, 'form': form})
