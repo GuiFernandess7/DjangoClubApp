@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import VenueForm, EventForm
+from django.shortcuts import get_object_or_404
 
 def home(request):
     return render(request, 'events/home.html', {})
@@ -90,3 +91,15 @@ def update_event(request, event_id):
     
     return render(request, 'events/update_event.html', 
                   {'event': event, 'form': form})
+
+def delete_event(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    event.delete()
+    return redirect('event-list')  
+    
+def delete_venue(request, venue_id):
+    venue = get_object_or_404(Venue, id=venue_id)
+    venue.delete()
+    return redirect('list-venues')  
+    
+    
