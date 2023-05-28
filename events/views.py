@@ -2,9 +2,41 @@ from django.shortcuts import render, redirect
 from .models import *
 from .forms import VenueForm, EventForm
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
 import csv
 
+import io
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
+
+# Generate a PDF venue list
+def venue_pdf(request):
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+    text_obj = c.beginText()
+    text_obj.setTextOrigin(inch, inch)
+    text_obj.setFont("Helvetica", 14)
+    venues = Venue.objects.all()
+
+    lines = []
+    for venue in venues:
+        lines.append(venue.name)
+        lines.append(venue.address)
+        lines.append(venue.zip_code)
+        lines.append(venue.phone)
+        lines.append(venue.web)
+        lines.append(venue.email_address)
+        lines.append(" ")
+    
+    for line in lines:
+        text_obj.textLine(line)
+
+    c.drawText(text_obj)
+    c.showPage()
+    c.save()
+    buf.seek(0)
+    return FileResponse(buf, as_attachment=True, filename='venue.pdf')
 
 # Generate text file venue list
 def venue_csv(request):
