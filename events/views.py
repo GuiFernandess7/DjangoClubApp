@@ -3,12 +3,15 @@ from .models import *
 from .forms import VenueForm, EventForm
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, FileResponse
+from django.core.paginator import Paginator
 import csv
 
 import io
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
+
+
 
 # Generate a PDF venue list
 def venue_pdf(request):
@@ -85,8 +88,15 @@ def add_venue(request):
 
 def list_venues(request):
     venue_list = Venue.objects.all()
+
+    p = Paginator(Venue.objects.all(), 1) # Venue by page
+    page = request.GET.get('page')
+    venues = p.get_page(page)
+
     return render(request, 'events/venues.html', 
-                  {'venue_list': venue_list})
+                  {'venue_list': venue_list,
+                   'venues': venues}
+                )
 
 def show_venue(request, venue_id):
     venue = Venue.objects.get(id=venue_id)
