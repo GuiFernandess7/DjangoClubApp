@@ -14,6 +14,6 @@ urlpatterns = [
     path('update_event/<event_id>', update_event, name="update-event"),
     path('delete_event/<event_id>', delete_event, name='delete-event'),
     path('delete_venue/<venue_id>', delete_venue, name='delete-venue'),
-    path('venue_text', venue_text, name='venue_text'),
+    path('venue_csv', venue_csv, name='venue_csv'),
 
 ]
