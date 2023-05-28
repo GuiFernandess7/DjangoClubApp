@@ -15,5 +15,6 @@ urlpatterns = [
     path('delete_event/<event_id>', delete_event, name='delete-event'),
     path('delete_venue/<venue_id>', delete_venue, name='delete-venue'),
     path('venue_csv', venue_csv, name='venue_csv'),
+    path('venue_pdf', venue_pdf, name='venue_pdf'),
 
 ]
