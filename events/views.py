@@ -3,23 +3,25 @@ from .models import *
 from .forms import VenueForm, EventForm
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
+import csv
+
 
 # Generate text file venue list
-def venue_text(request):
-    response = HttpResponse(content_type='text/plain')
-    response['Content-Disposition'] = "attachment; filename=venues.txt"
+def venue_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = "attachment; filename=venues.csv"
     venues = Venue.objects.all()
-    
-    lines = []
+    writer = csv.writer(response)
+    writer.writerow(['Name', 'Address', 'Zip Code', 'Phone', 'Web Address', 'Email'])
+
     for venue in venues:
-        lines.append(f"""{venue.name}\n
-        {venue.address}\n
-        {venue.zip_code}\n
-        {venue.phone}\n
-        {venue.web}\n
-        {venue.email_address}\n\n""")
-        
-    response.writelines(lines)
+        writer.writerow([venue.name,
+        venue.address,
+        venue.zip_code,
+        venue.phone,
+        venue.web,
+        venue.email_address])
+
     return response
 
 def home(request):
