@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, logout, login as auth_login
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 
 def login(request):
     if request.method == 'POST':
@@ -21,3 +22,19 @@ def logout_user(request):
     logout(request)
     messages.success(request, "You were Logged Out")
     return redirect('home')
+
+def register_user(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username, password=password)
+            auth_login(request, user)
+            messages.success(request, ("Regitration Successfull"))
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+
+    return render(request, 'auth/register_user.html', {'form': form})
