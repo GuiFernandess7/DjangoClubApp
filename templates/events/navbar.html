@@ -9,25 +9,39 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'event-list' %}">Events</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'list-venues'%}">Venues</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'add-venue'%}">Add Venue</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'add-event' %}">Add Event</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'venue_csv' %}">Venue Text Upload</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'venue_pdf' %}">Venue PDF File</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Events
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'event-list' %}">All</a></li>
+                <li><a class="dropdown-item" href="{% url 'add-event' %}">Add event</a></li>
+                <li><hr class="dropdown-divider"></li>
+            </ul>
           </li>
 
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Venues
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'list-venues'%}">All</a></li>
+                <li><a class="dropdown-item" href="{% url 'add-venue'%}">Add Venue</a></li>
+                <li><hr class="dropdown-divider"></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Download
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'venue_csv'%}">Venue Text Upload</a></li>
+                <li><a class="dropdown-item" href="{% url 'venue_pdf' %}">Venue PDF File</a></li>
+                <li><hr class="dropdown-divider"></li>
+            </ul>
+          </li>
+        
           {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
