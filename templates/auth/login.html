@@ -1,33 +1,21 @@
 {% extends 'events/base.html' %}
 
 {% block content %}
-<div class="sidenav">
-    <div class="shadow p-4 mb-5 bg-body rounded">
-      <div class="login-main-text">
-          <h2>Application<br> Login Page</h2>
-          <p>Login or register from here to access</p>
-      </div>
-      <div class="main">
-          <div class="col-md-6 col-sm-12">
-              <div class="login-form">
-                  <form>
-                      <br/>
-                      <div class="form-group">
-                          <br/>
-                          <input type="text" class="form-control" placeholder="username">
-                          <br/>
-                      </div>
-                      <div class="form-group">
-                          <br/>
-                          <input type="text" class="form-control" placeholder="password">
-                          <br/>
-                      </div>
-                      <a type="submit" class="btn btn-black" href="{% url 'home' %}">Log in</a>
-                      <a type="submit" class="btn btn-black" href="{% url 'register_user'%}">Register</a>
-                  </form>
-              </div>
-        </div>
-    </div>
-    </div>
+<div class="shadow p-4 mb-5 bg-body rounded">
+    <h1>Login</h1>
+    <br><br/>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" aria-describedby="userHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-dark">Log In</button>
+            </form>
+    <br><br/>
 </div>
 {% endblock %}

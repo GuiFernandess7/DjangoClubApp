@@ -27,12 +27,16 @@
                         </ul>
                     </p>
                     </div>
-                    <div class="card-footer text-body-secondary">
-                        <a href="{% url 'update-event' event.id %}" 
-                        class="btn btn-warning">Update Event</a>
-                        <a href="{% url 'delete-event' event.id %}" 
-                        class="btn btn-danger">Delete Event</a>
-                    </div>
+                    {% if user.is_authenticated %}
+                        {% if user == event.manager %}
+                            <div class="card-footer text-body-secondary">
+                                <a href="{% url 'update-event' event.id %}" 
+                                class="btn btn-warning">Update Event</a>
+                                <a href="{% url 'delete-event' event.id %}" 
+                                class="btn btn-danger">Delete Event</a>
+                            </div>
+                        {% endif %}
+                    {% endif %}
                 </div>
             {% endfor %}
         </ul>
