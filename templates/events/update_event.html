@@ -14,8 +14,9 @@
                 </form>
             </div>
         {% else %}
-        <h2>Access Denied</h2>
-        <p>Only the event manager can update this event</p>
+            <h2>Access Denied</h2>
+            <p>Only the event manager can update this event</p>
+        {% endif %}
     {% else %}
         <h1>You must be logged in to view this page</h1>
         <a href="{% url 'login'%}" class="btn btn-info">Login</a>
