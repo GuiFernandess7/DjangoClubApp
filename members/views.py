@@ -13,8 +13,8 @@ def login(request):
             auth_login(request, user)
             return redirect('home')
         else:
-            messages.success(request, ("There was a error logging In"))
-            return redirect('login')
+            messages.warning(request, ("There was a error logging In"))
+            return redirect('home')
     else:
         return render(request, 'auth/login.html')
     
