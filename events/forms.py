@@ -5,7 +5,7 @@ from .models import Venue, Event
 class VenueForm(ModelForm):
     class Meta:
         model = Venue
-        fields = "__all__"
+        fields = ('name', 'address', 'zip_code', 'phone', 'web', 'email_address')
         labels = {'name': "",
                    'address': "",
                    'zip_code': "",
@@ -23,7 +23,7 @@ class VenueForm(ModelForm):
 class EventForm(ModelForm):
     class Meta:
         model = Event
-        fields = "__all__"
+        fields = ('name', 'event_date', 'venue', 'manager', 'description', 'attendees')
         labels = {'name': "",
                    'event_date': "YYYY-MM-DD HH:mm:ss",
                    'venue': "Venue:",
