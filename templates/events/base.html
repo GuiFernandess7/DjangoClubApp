@@ -8,22 +8,27 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Club Manager</title>
+    <style>
+        body {
+            background: #f4f4f4;
+        }
+    </style>
 </head>
 <body>
     {% include 'events/navbar.html' %}
     <br/>
-    <div class="container">
-        {% block content %}
-        {% endblock %}
+        <div class="container">
+            {% block content %}
+            {% endblock %}
 
-        {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
         </div>
-        {% endfor %}
-    {% endif %}
-    </div>
 </body>
 </html>
