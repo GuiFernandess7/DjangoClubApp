@@ -1,12 +1,17 @@
 {% extends 'events/base.html' %}
 
 {% block content %}
-
 <center>
-    <h1>Event deleted</h1>
-    <div>
-        <a href="{% url 'event-list'%}" class="btn btn-light">Voltar</a>
-    </div>
+    {% if user.is_authenticated %}
+        <h1>Event deleted</h1>
+        <div>
+            <a href="{% url 'event-list'%}" class="btn btn-light">Voltar</a>
+        </div>
+    {% else %}
+        <h1>You must be logged in to view this page</h1>
+        <a href="{% url 'login'%}" class="btn btn-info">Login</a>
+    {% endif %}
+
 </center>
 
 {% endblock %}
