@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import *
-from .forms import VenueForm, EventForm
+from .forms import VenueForm, EventForm, EventAdminForm
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, FileResponse
 from django.core.paginator import Paginator
@@ -133,14 +133,27 @@ def update_venue(request, venue_id):
 def add_event(request):
     submitted = False
     if request.method == "POST":
-        form = EventForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("/add_event?submitted=True")
+        if request.user.is_superuser:
+            form = EventAdminForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect("/add_event?submitted=True")
+        else:
+            form = EventForm(request.POST)
+            if form.is_valid():
+                event = form.save(commit=False)
+                event.manager = request.user
+                event.save()
+                form.save()
+                return redirect("/add_event?submitted=True")
+
     else:
+        if request.user.is_superuser:
+            form = EventAdminForm()
+        else:
+            form = EventForm()
         if 'submitted' in request.GET:
             submitted = True
-        form = EventForm()
 
     context = {
         'form': form,
@@ -151,7 +164,10 @@ def add_event(request):
 
 def update_event(request, event_id):
     event = Event.objects.get(id=event_id)
-    form = EventForm(request.POST or None, instance=event)
+    if request.user.is_superuser:
+        form = EventAdminForm(request.POST or None, instance=event)
+    else:
+        form = EventForm(request.POST or None, instance=event)
     if form.is_valid():
         form.save()
         return redirect('event-list')
