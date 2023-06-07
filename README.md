@@ -1,5 +1,5 @@
 # Django Club App
-A Django CRUD app for Clubs Management with user validation and authentication.
+A Django CRUD app for Clubs Management and Registrations with user validation and authentication.
 
 <hr/>
 
