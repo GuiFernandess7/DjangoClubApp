@@ -3,7 +3,7 @@ A Django CRUD app for Clubs Management with user validation and authentication.
 
 <hr/>
 
-<img src="previews/preview1.gif" alt="Descrição opcional" width="500px" />
+<img src="preview1.gif" alt="Descrição opcional" width="500px" />
 
 
 #### DISCLAIMER:
