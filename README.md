@@ -9,9 +9,10 @@ The app is a Django-based web application designed to facilitate the management 
 ### First access (when the user is not authenticated):
 <img src="previews/preview1.gif" alt="Descrição opcional" width="500px" />
 
-### User Login:
+### Venues and Events Page:
 <img src="previews/preview2.gif" alt="Descrição opcional" width="500px" />
 
+### User login
 <img src="previews/preview3.gif" alt="Descrição opcional" width="500px" />
 <img src="previews/preview4.gif" alt="Descrição opcional" width="500px" />
 
