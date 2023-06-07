@@ -16,7 +16,7 @@ The app is a Django-based web application designed to facilitate the management 
 <img src="previews/preview3.gif" alt="Descrição opcional" width="500px" />
 <img src="previews/preview4.gif" alt="Descrição opcional" width="500px" />
 
-### CSV and PDF ExportThe Club Registration Application allows users to export venue data in CSV and PDF formats. To export the data, follow these steps:
+### CSV and PDF Export: The app allows users to export venue data in CSV and PDF formats. To export the data, follow these steps:
 
 * Navigate to the Downloads section in the navbar.
 * Select the desired export format (CSV or PDF).
